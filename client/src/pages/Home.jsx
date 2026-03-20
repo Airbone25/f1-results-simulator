@@ -26,30 +26,30 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
-        <div className="text-center space-y-8">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic leading-none">
-            Rewrite <span className="text-red-600">Formula 1</span> <br /> History
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-20 md:pb-32">
+        <div className="text-center space-y-6 md:space-y-8">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter uppercase italic leading-tight md:leading-none">
+            Rewrite <span className="text-red-600">Formula 1</span> <br className="hidden sm:block" /> History
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-medium leading-relaxed">
+          <p className="max-w-2xl mx-auto text-slate-400 text-base md:text-xl font-medium leading-relaxed px-4">
             The ultimate what-if playground. Change race results, simulate DNFs, and watch the championship standings shift in real-time. 
           </p>
           
-          <div className="pt-8 flex flex-wrap justify-center gap-4">
+          <div className="pt-4 md:pt-8 flex flex-col sm:flex-row justify-center gap-4 px-8 sm:px-0">
             <button 
               onClick={() => navigate('/simulator')}
-              className="bg-white text-black hover:bg-slate-200 px-8 py-4 rounded-full text-lg font-black uppercase italic transition-all shadow-xl"
+              className="bg-white text-black hover:bg-slate-200 px-8 py-4 rounded-full text-lg font-black uppercase italic transition-all shadow-xl w-full sm:w-auto"
             >
               Get Started
             </button>
-            <button className="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-full text-lg font-black uppercase italic transition-all border border-slate-700">
+            <button className="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-full text-lg font-black uppercase italic transition-all border border-slate-700 w-full sm:w-auto">
               Watch Demo
             </button>
           </div>
         </div>
 
         {/* Features Grid */}
-        <div className="mt-32 grid md:grid-cols-3 gap-8">
+        <div className="mt-20 md:mt-32 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           <div className="bg-slate-900/50 p-8 rounded-2xl border border-slate-800 hover:border-red-600/50 transition-colors group">
             <div className="w-12 h-12 bg-red-600/10 text-red-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m15 19 4-4"/><path d="M3.5 5.5 5 4"/><path d="M10 2.5 7 4"/><path d="M19 8.5 20.5 7"/><path d="M15 2.5 17 4"/><path d="M8 8 5 11"/></svg>
