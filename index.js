@@ -1,10 +1,11 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const fs = require('fs')
 
 const app = express()
 
-app.use(cors())
+app.use(cors({origin: process.env.FRONTEND_URL}))
 app.use(express.json())
 
 const raceRoutes = require('./routes/race')
