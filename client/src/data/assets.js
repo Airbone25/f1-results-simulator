@@ -1,12 +1,32 @@
 export const QUOTES = [
-  { text: "Is Charles catching him or not?", author: "Sky Sports F1" },
-  { text: "Must be the water", author: "Sebastian Vettel" },
-  { text: "Smooth Operator", author: "Carlos Sainz" },
-  { text: "Simply Lovely", author: "Max Verstappen" },
-  { text: "It's lights out and away we go!", author: "David Croft" },
-  { text: "Leave me to it, I know what I'm doing!", author: "Kimi Raikkonen" },
-  { text: "No, Michael, no! This is so not right!", author: "Toto Wolff" },
-  { text: "Box, Box, Box!", author: "Race Engineer" }
+  { 
+    text: "Simply Lovely", 
+    author: "Max Verstappen", 
+    code: "VER", 
+    image: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png",
+    color: "#3671C6"
+  },
+  { 
+    text: "Hammer Time, Lewis", 
+    author: "Lewis Hamilton", 
+    code: "HAM", 
+    image: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png",
+    color: "#E10600"
+  },
+  { 
+    text: "I think I've got a problem...", 
+    author: "George Russell", 
+    code: "RUS", 
+    image: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png",
+    color: "#27F4D2"
+  },
+  { 
+    text: "Smooth Operator", 
+    author: "Carlos Sainz", 
+    code: "SAI", 
+    image: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png",
+    color: "#64C4FF"
+  }
 ];
 
 export const TEAM_ASSETS = {
@@ -22,7 +42,6 @@ export const TEAM_ASSETS = {
   "Kick Sauber": { color: "#52E252", secondary: "#000000", accent: "#FFFFFF" }
 };
 
-// Placeholder URLs for driver headshots (using standard F1 media patterns where possible)
 export const DRIVER_ASSETS = {
   "1": { name: "Max Verstappen", code: "VER", headshot: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png" },
   "81": { name: "Oscar Piastri", code: "PIA", headshot: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png" },
@@ -35,9 +54,9 @@ export const DRIVER_ASSETS = {
 };
 
 export const THEMES = {
-  "default": { name: "Standard", main: "#E10600", bg: "#020617" },
-  "leclerc": { name: "Tifosi Red", main: "#E10600", bg: "#1a0000" },
-  "verstappen": { name: "Orange Army", main: "#FF8000", bg: "#0f0800" },
-  "norris": { name: "Papaya", main: "#FF8000", bg: "#0a0a0a" },
-  "hamilton": { name: "Silver Arrow", main: "#27F4D2", bg: "#0a0a0a" }
+  "default": { name: "Standard", main: "#E10600", bg: "#020617", car: "/cars/McLaren-2025-F1-scaled.webp" },
+  "leclerc": { name: "Ferrari", main: "#E10600", bg: "#1a0000", car: "/cars/Ferrari-SF-25-front-render.webp" },
+  "verstappen": { name: "Red Bull", main: "#3671C6", bg: "#000814", car: "/cars/McLaren-2025-F1-scaled.webp" },
+  "norris": { name: "McLaren", main: "#FF8000", bg: "#0a0a0a", car: "/cars/McLaren-2025-F1-scaled.webp" },
+  "hamilton": { name: "Hamilton 25", main: "#E10600", bg: "#0a0a0a", car: "/cars/Ferrari-SF-25-front-render.webp" }
 };

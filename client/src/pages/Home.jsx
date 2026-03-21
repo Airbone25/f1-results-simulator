@@ -16,12 +16,32 @@ export default function Home() {
   }, [])
 
   const theme = THEMES[activeTheme]
+  const quote = QUOTES[currentQuoteIndex]
 
   return (
     <div 
-      className="min-h-screen text-white font-sans selection:bg-red-500/30 transition-colors duration-1000"
+      className="min-h-screen text-white font-sans selection:bg-red-500/30 transition-all duration-1000 relative overflow-x-hidden"
       style={{ backgroundColor: theme.bg }}
     >
+      {/* Background F1 Car Image */}
+      <AnimatePresence mode="wait">
+        <motion.div 
+          key={activeTheme}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 0.25, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 z-0 pointer-events-none"
+        >
+          <img 
+            src={theme.car} 
+            alt="F1 Background" 
+            className="w-full h-full object-cover grayscale brightness-75"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950"></div>
+        </motion.div>
+      </AnimatePresence>
+
       {/* Navbar */}
       <nav className="border-b border-white/5 bg-black/20 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -37,16 +57,21 @@ export default function Home() {
             <span className="font-bold tracking-tight text-xl uppercase">Simulator</span>
           </div>
           
-          <div className="hidden md:flex items-center gap-4 bg-white/5 p-1 rounded-full border border-white/10">
-            {Object.entries(THEMES).map(([id, t]) => (
-              <button
-                key={id}
-                onClick={() => setActiveTheme(id)}
-                className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${activeTheme === id ? 'bg-white text-black' : 'text-slate-400 hover:text-white'}`}
-              >
-                {t.name}
-              </button>
-            ))}
+          <div className="hidden md:flex items-center gap-4">
+             <div className="relative group">
+                <select 
+                  value={activeTheme}
+                  onChange={(e) => setActiveTheme(e.target.value)}
+                  className="bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full appearance-none cursor-pointer hover:bg-white/10 transition-colors pr-10 outline-none"
+                >
+                  {Object.entries(THEMES).map(([id, t]) => (
+                    <option key={id} value={id} className="bg-slate-900 text-white">{t.name} Theme</option>
+                  ))}
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+             </div>
           </div>
 
           <button 
@@ -60,45 +85,13 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-20 md:pb-32">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-20 md:pb-32 relative z-10">
         <div className="relative">
-          {/* Background Decorative Element */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-gradient-to-b from-red-600/10 to-transparent blur-3xl -z-10 opacity-50"></div>
-          
           <div className="text-center space-y-6 md:space-y-10 relative z-10">
-            {/* Radio Message Ticker */}
-            <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-              <div className="flex gap-1">
-                {[1, 2, 3].map(i => (
-                  <motion.div 
-                    key={i}
-                    animate={{ height: [4, 12, 4] }}
-                    transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.2 }}
-                    className="w-1 bg-green-500 rounded-full"
-                  />
-                ))}
-              </div>
-              <div className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-2">
-                Incoming Radio <span className="w-1 h-1 bg-green-500 rounded-full animate-pulse"></span>
-              </div>
-              <div className="h-4 w-px bg-white/10 mx-1"></div>
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentQuoteIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="text-[10px] font-bold text-white uppercase italic tracking-wider truncate max-w-[150px] sm:max-w-none"
-                >
-                  "{QUOTES[currentQuoteIndex].text}"
-                </motion.span>
-              </AnimatePresence>
-            </div>
-
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tighter uppercase italic leading-[0.9] md:leading-[0.85]"
+              className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter uppercase italic leading-[0.9] md:leading-[0.85]"
             >
               Rewrite <br /> 
               <span style={{ color: theme.main }}>Formula 1</span> <br /> 
@@ -130,19 +123,76 @@ export default function Home() {
                 Watch Demo
               </button>
             </motion.div>
+
+            {/* F1 Radio Message UI - REFINED */}
+            <div className="pt-10 md:pt-20 max-w-xl mx-auto">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={currentQuoteIndex}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  className="bg-black/60 backdrop-blur-xl border-l-4 p-4 rounded-r-2xl flex items-center gap-4 shadow-2xl"
+                  style={{ borderColor: quote.color }}
+                >
+                  {/* Driver Avatar Circle */}
+                  <div className="relative flex-shrink-0">
+                    <div 
+                      className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 overflow-hidden bg-slate-800"
+                      style={{ borderColor: quote.color }}
+                    >
+                      <img src={quote.image} alt="" className="w-full h-full object-cover" />
+                    </div>
+                    <div 
+                      className="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded text-[8px] font-black text-white italic"
+                      style={{ backgroundColor: quote.color }}
+                    >
+                      {quote.code}
+                    </div>
+                  </div>
+
+                  {/* Radio Info & Waves */}
+                  <div className="flex-1 text-left min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">
+                        {quote.author}
+                      </span>
+                      <div className="flex gap-1 items-end h-3">
+                        {[1, 2, 3, 4, 5].map(i => (
+                          <motion.div 
+                            key={i}
+                            animate={{ height: [4, 12, 4] }}
+                            transition={{ repeat: Infinity, duration: 0.6, delay: i * 0.1 }}
+                            className="w-0.5 bg-green-500 rounded-full"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="text-sm md:text-xl font-black uppercase italic tracking-tight text-white line-clamp-2">
+                      "{quote.text}"
+                    </div>
+                  </div>
+
+                  {/* Radio Label */}
+                  <div className="hidden sm:block text-[8px] font-black uppercase tracking-[0.4em] text-slate-700 -rotate-90 origin-right whitespace-nowrap pr-2">
+                    Team Radio
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
 
-        {/* Visual Car Placeholder/Graphic */}
-        <div className="mt-20 relative h-32 md:h-64 flex items-center justify-center overflow-hidden">
+        {/* Visual Decoration */}
+        <div className="mt-20 relative h-20 md:h-40 flex items-center justify-center overflow-hidden">
            <motion.div 
             initial={{ x: '-150%' }}
             animate={{ x: '150%' }}
             transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
             className="absolute h-px w-full bg-gradient-to-r from-transparent via-white/50 to-transparent"
            />
-           <div className="text-[120px] md:text-[240px] font-black italic text-white/5 uppercase tracking-tighter select-none">
-             SIMULATOR
+           <div className="text-[100px] md:text-[200px] font-black italic text-white/5 uppercase tracking-tighter select-none">
+             RACING
            </div>
         </div>
 
@@ -186,7 +236,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12">
+      <footer className="border-t border-white/5 py-12 relative z-10 bg-slate-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-500 text-[10px] font-black uppercase tracking-widest">
           <p>© 2026 F1 What-If Simulator. Not affiliated with the Formula 1 group of companies.</p>
         </div>
