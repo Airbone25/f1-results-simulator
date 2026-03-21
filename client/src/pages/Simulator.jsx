@@ -185,11 +185,11 @@ export default function Simulator() {
 
       <div className="flex flex-col md:flex-row h-[calc(100vh-64px)] overflow-hidden">
         {/* Sidebar: Race List - Scrollable horizontal on mobile, vertical on desktop */}
-        <aside className="w-full md:w-80 border-b md:border-b-0 md:border-r border-slate-800 flex-shrink-0 bg-slate-900/20">
+        <aside className="w-full md:w-80 border-b md:border-b-0 md:border-r border-slate-800 flex-shrink-0 bg-slate-900/20 flex flex-col">
           <div className="p-3 md:p-4 border-b border-slate-800 hidden md:block">
             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">2025 Calendar</h2>
           </div>
-          <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto divide-x md:divide-x-0 md:divide-y divide-slate-900 no-scrollbar">
+          <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto divide-x md:divide-x-0 md:divide-y divide-slate-900 flex-1">
             {loading ? (
               <div className="p-4 md:p-8 text-center text-slate-500 text-[10px] md:text-sm animate-pulse italic whitespace-nowrap">Loading...</div>
             ) : (
@@ -263,6 +263,7 @@ export default function Simulator() {
                           id={result.driverNo} 
                           result={result} 
                           toggleDNF={toggleDNF}
+                          type={races[selectedRace]?.type || 'Race'}
                         />
                       ))}
                     </SortableContext>

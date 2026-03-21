@@ -1,7 +1,18 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-export default function SortableItem({ id, result, toggleDNF }) {
+const POINTS_MAP = {
+  'Race': {
+    '1': 25, '2': 18, '3': 15, '4': 12, '5': 10,
+    '6': 8, '7': 6, '8': 4, '9': 2, '10': 1
+  },
+  'Sprint': {
+    '1': 8, '2': 7, '3': 6, '4': 5, '5': 4,
+    '6': 3, '7': 2, '8': 1
+  }
+}
+
+export default function SortableItem({ id, result, toggleDNF, type = 'Race' }) {
   const {
     attributes,
     listeners,
@@ -19,6 +30,7 @@ export default function SortableItem({ id, result, toggleDNF }) {
   };
 
   const isDNF = result.position === 'NC' || result.position === 'DNF' || result.position === 'DQ'
+  const points = POINTS_MAP[type]?.[result.position] || 0
 
   return (
     <div 
@@ -42,6 +54,9 @@ export default function SortableItem({ id, result, toggleDNF }) {
             {result.driver.name || result.driver}
           </div>
         </div>
+      </div>
+      <div className="w-10 md:w-16 text-right font-black italic text-xs md:text-lg text-slate-400 group-hover:text-white transition-colors pr-2">
+        {isDNF ? '0' : points}<span className="text-[8px] md:text-[10px] ml-0.5 opacity-50 uppercase not-italic">pts</span>
       </div>
       <button 
         onClick={() => toggleDNF(result.driverNo)}
